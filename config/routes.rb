@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 	get '/about_us', to: 'welcome#show'
 	post '/tips', to: "tips#create"
 
+	get '/profile', to: "users#show"
+
 	resources :stations, :users, :lines
 
 

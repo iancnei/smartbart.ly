@@ -37,7 +37,7 @@
 <h2>Stations:</h2>
 <h3>Start of the Line</h3>
 <% @line.stations.each do |stationAbbreviation| %>
-	<% station = getStationByAbbreviation(stationAbbreviation) %>
+	<% station = get_station_by_abbreviation(stationAbbreviation) %>
 	<%= link_to station.name, station_path(station.slug) %><br>
 <% end %>
 <h3>End of the Line</h3>
@@ -48,7 +48,7 @@
 <% wellPresent = false %>
 <% @lineTimes.each do |train| %>
 	<% if train.value > Time.now %>
-		<% station = getStationById(train.station_id) %>
+		<% station = get_station_by_id(train.station_id) %>
 		<% if trainIndex == nil || trainIndex != train.train_index%>
 			<% trainIndex = train.train_index %>
 			<% if timeCounter != 0 %>

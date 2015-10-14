@@ -1,12 +1,12 @@
 module LinesHelper
 	include ApplicationHelper
 
-	def getStationByAbbreviation(stationAbbreviation)
-		Station.find_by_abbreviation(stationAbbreviation)
+	def get_station_by_abbreviation(station_abbreviation)
+		Station.find_by_abbreviation(station_abbreviation)
 	end
 
-	def getStationById(stationId)
-		Station.find_by_id(stationId)
+	def get_station_by_id(station_id)
+		Station.find_by_id(station_id)
 	end
 
 end

@@ -1,4 +1,4 @@
-<h1><%= @wantedStation.name %></h1>
+<h1><%= @wanted_station.name %></h1>
 
 <h3>User Tips</h3>
 <% if !@tips.empty? %>
@@ -13,7 +13,7 @@
 	<%= form_for(@tip, url: tips_path) do |f| %>
 		<%= f.text_area :description, placeholder: "Add a tip about this station!", class: "form-control", cols: 50, rows: 4 %>
 		<%= f.hidden_field :user_id, value: @current_user.id %>
-		<%= f.hidden_field :station_id, value: @wantedStation.id %>
+		<%= f.hidden_field :station_id, value: @wanted_station.id %>
 		<%= f.submit "Share", class: "btn btn-primary" %>
 	<% end %>
 <% end %>
@@ -35,7 +35,7 @@
 				<% end %>
 			<% end %>
 			<% wellPresent = false %>
-			<% @wantedLine = getLineName(lineNumber) %>
+			<% @wantedLine = get_line_name(lineNumber) %>
 			<h3 class="stationName" style="background-color: <%= @wantedLine.color %>;"><%= link_to @wantedLine.name, line_path(@wantedLine.slug) %></h3>
 			<table class="table table-hover">
 			<% timeCounter = 0 %>
@@ -93,7 +93,7 @@
 				<% end %>
 			<% end %>
 			<% wellPresent = false %>
-			<% @wantedLine = getLineName(lineNumber) %>
+			<% @wantedLine = get_line_name(lineNumber) %>
 			<h3 class="stationName" style="background-color: <%= @wantedLine.color %>;"><%= link_to @wantedLine.name, line_path(@wantedLine.slug) %></h3>
 			<table class="table table-hover">
 			<% timeCounter = 0 %>

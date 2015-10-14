@@ -9,25 +9,20 @@ class StationsController < ApplicationController
   end
 
   def show
-  	@stationNorthLines = []
-    @stationSouthLines = []
-  	@stationNorthTimes = {}
-    @stationSouthTimes = {}
-
-  	@wantedStation = Station.friendly.find(params[:id])
+  	@wanted_station = Station.friendly.find(params[:id])
     @tip = Tip.new
-    @tips = Tip.where(station_id: @wantedStation.id).order(:created_at).reverse
+    @tips = Tip.where(station_id: @wanted_station.id).order(:created_at).reverse
 
   	# get the specified station's info
-    station = BartApi.station("stninfo", {orig: @wantedStation.abbreviation})
+    station = BartApi.station("stninfo", {orig: @wanted_station.abbreviation})
 
   	# drill down to the routes we need and append them to the array of routes
-  	getLines(station, "north_routes")
-  	getLines(station, "south_routes")
+  	@stationNorthLines = get_lines(station, "north_routes")
+  	@stationSouthLines = get_lines(station, "south_routes")
 
   	# go through each route's schedule and find the station and its associated time
-  	getStationTimes(@stationNorthLines, "north")
-    getStationTimes(@stationSouthLines, "south")
+  	@stationNorthTimes = get_station_times(@stationNorthLines, "north")
+    @stationSouthTimes = get_station_times(@stationSouthLines, "south")
   end
 
 end

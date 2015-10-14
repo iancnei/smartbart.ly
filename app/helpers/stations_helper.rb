@@ -1,63 +1,38 @@
 module StationsHelper
 	include ApplicationHelper
 
-	def getLines(station, lineDirection)
-		if station["root"]["stations"]["station"][lineDirection] != nil
-			if station["root"]["stations"]["station"][lineDirection]["route"].respond_to?("each")
-				station["root"]["stations"]["station"][lineDirection]["route"].each do |line|
-					if lineDirection == "north_routes"
-						@stationNorthLines.push(line.gsub(/[^\d]/, ''))
-					elsif lineDirection == "south_routes"
-						@stationSouthLines.push(line.gsub(/[^\d]/, ''))
-					end
+	def get_lines(station, line_direction)
+    	@station_lines = []
+		if station["root"]["stations"]["station"][line_direction] != nil
+			if station["root"]["stations"]["station"][line_direction]["route"].respond_to?("each")
+				station["root"]["stations"]["station"][line_direction]["route"].each do |line|
+					@station_lines.push(line.gsub(/[^\d]/, ''))
 				end
 			else
-				if lineDirection == "north_routes"
-					@stationNorthLines.push(station["root"]["stations"]["station"][lineDirection]["route"].gsub(/[^\d]/, ''))
-				elsif lineDirection == "south_routes"
-					@stationSouthLines.push(station["root"]["stations"]["station"][lineDirection]["route"].gsub(/[^\d]/, ''))
-				end
+				@station_lines.push(station["root"]["stations"]["station"][line_direction]["route"].gsub(/[^\d]/, ''))
 			end
 		end
+		return @station_lines
 	end
 
-	def getLineName(lineNumber)
-		if lineNumber != nil
-			Line.find_by_number(lineNumber)
+	def get_line_name(line_number)
+		if line_number != nil
+			Line.find_by_number(line_number)
 		end
 	end
 
-	def getStationTimes(station, direction)
+	def get_station_times(station, direction)
+    	@station_times = {}
 		station.each do |line|
-			if direction == "north"
-				@stationNorthTimes["#{line}"] = []
-			elsif direction == "south"
-				@stationSouthTimes["#{line}"] = []
-			end
-			lineSchedule = OrigTime.where(station_id: @wantedStation.id, line_number: line).order(:train_index)
+			@station_times["#{line}"] = []
+			lineSchedule = OrigTime.where(station_id: @wanted_station.id, line_number: line).order(:train_index)
 			lineSchedule.each do |arrival|
 				if arrival.value > Time.now
-					if direction == "north"
-		 				@stationNorthTimes["#{line}"].push(arrival)
-		 			elsif direction == "south"
-		 				@stationSouthTimes["#{line}"].push(arrival)
-		 			end
+		 			@station_times["#{line}"].push(arrival)
 		 		end
 	 		end
-	  		#lineSchedule = BartApi.schedule("routesched", {route: line})
-			# lineSchedule["root"]["route"]["train"].each do |train|
-			# 	train["stop"].each do |stop|
-			# 		if stop["station"] == @wantedStation.abbreviation && stop["origTime"] != nil
-			# 			if direction == "north"
-			# 				@stationNorthTimes["#{line}"].push(stop["origTime"])
-			# 			elsif direction == "south"
-			# 				@stationSouthTimes["#{line}"].push(stop["origTime"])
-			# 			end
-			# 			break
-			# 		end
-			# 	end
-			# end
 		end
+		return @station_times
 	end
 
 end
