@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+#NOTE: Yay, testing!
+
 RSpec.describe Line, type: :model do
   
 	describe 'Attributes' do

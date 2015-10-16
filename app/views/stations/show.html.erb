@@ -1,14 +1,17 @@
 <h1><%= @wanted_station.name %></h1>
 
+<% #NOTE: This is a big view. It would improve readability if it were broken up into partials %> 
+
 <h3>User Tips</h3>
 <% if !@tips.empty? %>
 	<% @tips.each do |tip| %>
+		<% #NOTE: There should be no need to interpolate here. `tip.user.first_name` is already a string. %>
 		<p><%= "#{tip.user.first_name} #{tip.user.last_name} on #{tip.created_at.to_formatted_s(:long_ordinal)} said: #{tip.description}" %></p>
 	<% end %>
 <% else %>
 	<p>There are no tips for this station yet.</p>
 <% end %>
-
+<% #NOTE: Good use of referencing `@current_user` and not calling the `current_user` method again %>
 <% if @current_user %>
 	<%= form_for(@tip, url: tips_path) do |f| %>
 		<%= f.text_area :description, placeholder: "Add a tip about this station!", class: "form-control", cols: 50, rows: 4 %>
@@ -20,6 +23,7 @@
 
 <% if !@stationNorthTimes.empty? %>
 	<h2>Northbound</h2>
+	<% #NOTE: again, too much logic. Generally, there should be no variable declaration in the view %>
 	<% timeCounter = 0 %>
 	<% wellPresent = false %>
 	<% @stationNorthTimes.each do |lineNumber, line| %>

@@ -1,4 +1,5 @@
 module StationsHelper
+	#NOTE: is the below `include` necessary?
 	include ApplicationHelper
 
 	def get_lines(station, line_direction)

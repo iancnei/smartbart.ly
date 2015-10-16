@@ -16,6 +16,8 @@ class StationsController < ApplicationController
   	# get the specified station's info
     station = BartApi.station("stninfo", {orig: @wanted_station.abbreviation})
 
+    #NOTE: Great organization & modularity using `getLines` & `getStationTimes`. It's common to use snake_case rather than CamelCase in ruby.
+
   	# drill down to the routes we need and append them to the array of routes
   	@stationNorthLines = get_lines(station, "north_routes")
   	@stationSouthLines = get_lines(station, "south_routes")
