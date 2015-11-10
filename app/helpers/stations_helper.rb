@@ -29,7 +29,7 @@ module StationsHelper
 			@station_times["#{line}"] = []
 			lineSchedule = OrigTime.where(station_id: @wanted_station.id, line_number: line).order(:train_index)
 			lineSchedule.each do |arrival|
-				if arrival.value > currenTime
+				if arrival.value > currentTime
 		 			@station_times["#{line}"].push(arrival)
 		 		end
 	 		end
