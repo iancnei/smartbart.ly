@@ -46,8 +46,9 @@
 <% trainIndex = nil %>
 <% timeCounter = 0 %>
 <% wellPresent = false %>
+<% Time.now.isdst ? currentTime = Time.now : currentTime = Time.now - 3600 %>
 <% @lineTimes.each do |train| %>
-	<% if train.value > Time.now %>
+	<% if train.value > currentTime %>
 		<% station = get_station_by_id(train.station_id) %>
 		<% if trainIndex == nil || trainIndex != train.train_index%>
 			<% trainIndex = train.train_index %>

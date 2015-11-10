@@ -1,10 +1,15 @@
 <div class="row" id='login_page'>
 	<div class="col-md-12">
-	  	<% if @user.errors.any? %>
-	  		<h3>Errors:</h3>
-	  			<% @user.errors.full_messages.each do |message| %>
-	  				<h5 class="alert alert-danger" role="alert"><%= message %></h5>
-	  			<% end %>
+	  	<% if flash[:error] %>
+  			<% flash.each do |key, message| %>
+  				<% if message.respond_to?('each') %>
+  					<% message.each do |singleMessage| %>
+  						<div class="alert alert-danger" role="alert"><%= singleMessage %></div>
+  					<% end %>
+  				<% else %>
+  					<div class="alert alert-danger" role="alert"><%= message %></div>
+  				<% end %>
+  			<% end %>
 	  	<% end %>
   	</div>
 </div>

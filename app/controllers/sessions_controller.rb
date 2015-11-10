@@ -13,8 +13,9 @@ class SessionsController < ApplicationController
 			redirect_to user_path(@user.id)
 		else
 			@user = User.new
-			# NOTE: Consider using the `flash` hash here
-			@user.errors[:base] << "Password or Email is incorrect."
+			# NOTE: Consider using the `flash` hash here\
+			flash[:error] = "Email or password is incorrect."
+			# @user.errors[:base] << "Password or Email is incorrect."
 			render :new
 		end
 	end
