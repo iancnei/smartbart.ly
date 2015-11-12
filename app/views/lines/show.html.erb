@@ -46,9 +46,10 @@
 <% trainIndex = nil %>
 <% timeCounter = 0 %>
 <% wellPresent = false %>
-<% Time.now.isdst ? currentTime = Time.now : currentTime = Time.now - 3600 %>
+<% # Time.now.isdst ? currentTime = Time.now : currentTime = Time.now - 3600 %>
 <% @lineTimes.each do |train| %>
-	<% if train.value > currentTime %>
+	<% # if train.value > currentTime %>
+	<% if train.value.in_time_zone("Pacific Time (US & Canada)") > Time.now %>
 		<% station = get_station_by_id(train.station_id) %>
 		<% if trainIndex == nil || trainIndex != train.train_index%>
 			<% trainIndex = train.train_index %>
@@ -65,7 +66,7 @@
 			<% wellPresent = false %>
 			<br>Train #<%= trainIndex %><br>
 			<table class="table table-hover">
-				<tr><td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+				<tr><td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 		<% elsif trainIndex == train.train_index && timeCounter == 3 %>
 			<% wellPresent = true %>
 			</table>
@@ -76,11 +77,11 @@
 			<div class="collapse" id="<%= trainIndex %>Times">
 			  <div class="well">
 			  	<table class="table table-hover">
-			  			<td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.getlocal("-07:00").strftime("%I:%M %p") %></td>
+			  			<td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td>
 		<% elsif trainIndex == train.train_index && timeCounter > 3 %>
-			<tr><td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+			<tr><td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 		<% else %>
-				<tr><td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+				<tr><td><%= link_to train.station.name, station_path(train.station.slug) %>: <%= train.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 		<% end %>
 		<% timeCounter += 1 %>
 	<% end %>

@@ -21,6 +21,7 @@ class StationsController < ApplicationController
   	# drill down to the routes we need and append them to the array of routes
   	@stationNorthLines = get_lines(station, "north_routes")
   	@stationSouthLines = get_lines(station, "south_routes")
+    # binding.pry
 
   	# go through each route's schedule and find the station and its associated time
   	@stationNorthTimes = get_station_times(@stationNorthLines, "north")

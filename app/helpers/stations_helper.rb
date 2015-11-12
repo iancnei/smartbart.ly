@@ -24,12 +24,13 @@ module StationsHelper
 
 	def get_station_times(station, direction)
     	@station_times = {}
-    	Time.now.isdst ? currentTime = Time.now : currentTime = Time.now - 3600
+    	# Time.now.isdst ? currentTime = Time.now : currentTime = Time.now - 3600
 		station.each do |line|
 			@station_times["#{line}"] = []
 			lineSchedule = OrigTime.where(station_id: @wanted_station.id, line_number: line).order(:train_index)
 			lineSchedule.each do |arrival|
-				if arrival.value > currentTime
+				# if arrival.value.in_time_zone("Pacific Time (US & Canada)") > currentTime
+				if arrival.value.in_time_zone("Pacific Time (US & Canada)") > Time.now
 		 			@station_times["#{line}"].push(arrival)
 		 		end
 	 		end

@@ -47,9 +47,9 @@
 				<% timeCounter += 1 %>
 				<% if timeCounter == 1 %>
 					<tbody>
-						<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+						<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% elsif timeCounter > 1 && timeCounter < 4 %>
-					<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+					<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% elsif timeCounter == 4 %>
 					<% wellPresent = true %>
 						</tbody>
@@ -62,9 +62,9 @@
 					  <div class="well">
 					  	<table class="table table-hover">
 					  		<tbody>
-					  			<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+					  			<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% else %>
-					<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+					<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% end %>
 			<% end %>
 		<% end %>
@@ -105,9 +105,9 @@
 				<% timeCounter += 1 %>
 				<% if timeCounter == 1 %>
 					<tbody>
-						<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+						<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% elsif timeCounter > 1 && timeCounter < 4 %>
-					<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+					<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% elsif timeCounter == 4 %>
 					<% wellPresent = true %>
 						</tbody>
@@ -120,9 +120,9 @@
 					  <div class="well">
 					  	<table class="table table-hover">
 					  		<tbody>
-					  			<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+					  			<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% else %>
-					<tr><td><%= arrival_time.value.getlocal("-07:00").strftime("%I:%M %p") %></td></tr>
+					<tr><td><%= arrival_time.value.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M %p") %></td></tr>
 				<% end %>
 			<% end %>
 		<% end %>
