@@ -24,7 +24,7 @@ module StationsHelper
 
 	def get_station_times(station, direction)
     	@station_times = {}
-    	Time.now.isdst ? currentTime = Time.now.getlocal('-07:00') : currentTime = Time.now.getlocal('-07:00') - 3600
+    	Time.now.getlocal('-07:00').isdst ? currentTime = Time.now.getlocal('-07:00') + 3600 : currentTime = Time.now.getlocal('-07:00')
 		station.each do |line|
 			@station_times["#{line}"] = []
 			lineSchedule = OrigTime.where(station_id: @wanted_station.id, line_number: line).order(:train_index)

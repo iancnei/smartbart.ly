@@ -46,7 +46,7 @@
 <% trainIndex = nil %>
 <% timeCounter = 0 %>
 <% wellPresent = false %>
-<% Time.now.isdst ? currentTime = Time.now.getlocal('-07:00') : currentTime = Time.now.getlocal('-07:00') - 3600 %>
+<% Time.now.getlocal('-07:00').isdst ? currentTime = Time.now.getlocal('-07:00') + 3600 : currentTime = Time.now.getlocal('-07:00') %>
 <% @lineTimes.each do |train| %>
 	<% if train.value.in_time_zone("Pacific Time (US & Canada)") > currentTime %>
 	<% # if train.value.in_time_zone("Pacific Time (US & Canada)") > Time.now %>
